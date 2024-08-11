@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import UserFlashCard from '../components/UserFlashCard';
 import axios from 'axios';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import { ClipLoader } from 'react-spinners'; // Example of a loader
+import { ClipLoader } from 'react-spinners' ;
+import { useNavigate } from 'react-router-dom';
 
 export type Card = {
   content: string;
@@ -43,7 +44,12 @@ const UserDashboard = () => {
     }, 300);
   };
 
+  const navigate = useNavigate() ;
   return (
+    <>
+    <div onClick={()=>{
+      navigate('/admin') ;
+    }} className="cursor-pointer absolute right-10 top-4 bg-blue-500 text-slate-50 p-4 rounded-xl">Admin Page</div>
     <div className="flex flex-col items-center justify-center h-screen p-4 gap-8 bg-gray-100 text-gray-800">
       {loading ? (
         <ClipLoader size={50} color="#4A90E2" loading={loading} />
@@ -78,6 +84,7 @@ const UserDashboard = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

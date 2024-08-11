@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import FlashCard from "../components/FlashCard";
-import AddCardModal from "../components/AddCardModal"; // Make sure this imports correctly
+import AddCardModal from "../components/AddCardModal";
 import axios from "axios";
+import { ClipLoader } from "react-spinners";
 
 const AdminDashboard = () => {
     const [allFlashCards, setAllFlashCards] = useState([]);
@@ -11,6 +12,8 @@ const AdminDashboard = () => {
     //@ts-ignore
     const [modalAnswer, setModalAnswer] = useState("");
 
+    const [loading , setLoading] = useState(true) ;
+
     useEffect(() => {
         fetchFlashCards();
     }, []);
@@ -19,8 +22,10 @@ const AdminDashboard = () => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/admin/bulk`);
             setAllFlashCards(response.data);
+            setLoading(false) ;
         } catch (error) {
             console.error("Error fetching flashcards:", error);
+            setLoading(false) ;
         }
     };
 
@@ -29,11 +34,20 @@ const AdminDashboard = () => {
             await axios.post(`${import.meta.env.VITE_BACKEND_URL}/admin/addFlashcard`, { content: newContent, answer: newAnswer });
             fetchFlashCards(); // Refresh the flashcards list
             setShowModal(false); // Close the modal
+            setLoading(false) ;
         } catch (error) {
             console.error("Error adding flashcard:", error);
+            setLoading(false) ;
         }
     };
 
+    
+    if(loading){
+        return <div className="h-screen w-screen flex justify-center items-center">
+            <ClipLoader size={50} color="#4A90E2" loading={loading} />
+        </div>
+    }
+    else {
     return (
         <>
             <div className="relative w-screen h-screen flex justify-center items-center">
@@ -69,6 +83,7 @@ const AdminDashboard = () => {
             />
         </>
     );
+}
 };
 
 export default AdminDashboard;

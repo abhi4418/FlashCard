@@ -14,7 +14,7 @@ const FlashCard = ({ content: initialContent, answer: initialAnswer, id, allFlas
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3000/admin/delete/${id}`);
+      await axios.delete(`https://flashcard-vhxv.onrender.com/admin/delete/${id}`);
       setAllFlashCards(allFlashCards.filter((flashcard: any) => flashcard.id !== id));
     } catch (error) {
       console.error('Error deleting flashcard:', error);
@@ -27,7 +27,7 @@ const FlashCard = ({ content: initialContent, answer: initialAnswer, id, allFlas
 
   const handleSave = async (newContent: string, newAnswer: string) => {
     try {
-      await axios.put(`http://localhost:3000/admin/update/${id}`, { content: newContent, answer: newAnswer });
+      await axios.put(`https://flashcard-vhxv.onrender.com/admin/update/${id}`, { content: newContent, answer: newAnswer });
       setContent(newContent);
       setAnswer(newAnswer);
       setIsModalOpen(false);

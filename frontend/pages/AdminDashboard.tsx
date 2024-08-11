@@ -15,7 +15,7 @@ const AdminDashboard = () => {
 
     const fetchFlashCards = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/admin/bulk');
+            const response = await axios.get('https://flashcard-vhxv.onrender.com/admin/bulk');
             setAllFlashCards(response.data);
         } catch (error) {
             console.error("Error fetching flashcards:", error);
@@ -24,7 +24,7 @@ const AdminDashboard = () => {
 
     const handleSaveFlashCard = async (newContent: string, newAnswer: string) => {
         try {
-            await axios.post('http://localhost:3000/admin/addFlashcard', { content: newContent, answer: newAnswer });
+            await axios.post('https://flashcard-vhxv.onrender.com/admin/addFlashcard', { content: newContent, answer: newAnswer });
             fetchFlashCards(); // Refresh the flashcards list
             setShowModal(false); // Close the modal
         } catch (error) {

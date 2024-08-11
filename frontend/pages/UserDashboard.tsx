@@ -16,7 +16,7 @@ const UserDashboard = () => {
   const [cardTransition, setCardTransition] = useState(false);
 
   useEffect(() => {
-    axios.get("https://flashcard-vhxv.onrender.com/user/bulk")
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/bulk`)
       .then(response => {
         setAllCards(response.data);
         setLoading(false);

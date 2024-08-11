@@ -6,7 +6,9 @@ import axios from "axios";
 const AdminDashboard = () => {
     const [allFlashCards, setAllFlashCards] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    //@ts-ignore
     const [modalContent, setModalContent] = useState("");
+    //@ts-ignore
     const [modalAnswer, setModalAnswer] = useState("");
 
     useEffect(() => {
